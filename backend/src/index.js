@@ -1,10 +1,13 @@
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 
-app.get("/", (req, res) => {
-    return res.send("oi");
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev")); //informa o método GET, POST,.. e o tempo decorrido dele
+
+app.use(require("./routes"));
 
 
 app.listen(3000);
